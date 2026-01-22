@@ -1,0 +1,581 @@
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
+:root {
+    --primary-color: #0056b3;   /* Deep Blue */
+    --accent-color: #007bff;    /* Bright Blue */
+    --text-dark: #1a1a1a;       /* Almost Black */
+    --text-gray: #555;          /* Grey Text */
+    --bg-light: #f8f9fa;        /* Light Grey Background */
+    --white: #ffffff;
+    
+    --font-main: 'Inter', sans-serif;
+    --max-width: 1200px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* Utility Classes */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding { padding: 80px 0; }
+.text-center { text-align: center; }
+.bg-light { background-color: var(--bg-light); }
+
+/* =========================================
+   2. NAVIGATION BAR (Glassy / Frosted)
+   ========================================= */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    
+    /* GLASSMORPHISM SETTINGS */
+    background: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+    backdrop-filter: blur(12px);          /* The "Frost" effect */
+    -webkit-backdrop-filter: blur(12px);  /* Safari support */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Subtle glass edge */
+    
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); /* Very soft shadow */
+    z-index: 1000;
+    height: 70px;
+}
+
+.nav-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+
+.nav-links a:hover { color: var(--accent-color); }
+
+/* Mobile Menu Button (Hidden on Desktop) */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mobile-menu-btn span {
+    width: 25px; height: 3px;
+    background-color: var(--text-dark);
+    transition: var(--transition);
+}
+
+
+
+/* =========================================
+   3. HERO SECTION
+   ========================================= */
+.hero-block {
+    padding-top: 140px; /* Space for fixed nav */
+    padding-bottom: 80px;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.hero-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.hero-conference-name {
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-divider {
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    margin: 15px 0;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    margin-bottom: 30px;
+    max-width: 90%;
+}
+
+.hero-info {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-item strong { display: block; color: var(--primary-color); }
+.info-item span { color: var(--text-dark); }
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 5px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.cta-button:hover { background-color: #003d82; }
+
+/* Hero Carousel */
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.hero-slide.active { opacity: 1; }
+
+.hero-slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+
+
+/* =========================================
+   4. ABOUT & THEMES
+   ========================================= */
+.about-block {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.section-divider {
+    width: 50px;
+    height: 3px;
+    background: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+/* Theme Cards Grid */
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.theme-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+
+.theme-card:hover { transform: translateY(-5px); }
+
+.theme-icon {
+    width: 60px; height: 60px;
+    margin: 0 auto 20px;
+}
+
+
+/* =========================================
+   5. SPEAKER CAROUSEL (Fixed Layout & styled Cards)
+   ========================================= */
+
+#speakers-section {
+    background: #fdfbfb;
+    padding: 60px 0;
+    overflow: hidden; 
+}
+
+.speaker-header {
+    text-align: left;
+    margin-bottom: 40px;
+    padding: 0 5px;
+}
+
+.speaker-header h2 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+
+.speaker-header p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+/* MAIN LAYOUT WRAPPER (The Sandwich) */
+.carousel-layout-wrapper {
+    display: flex;
+    align-items: center; /* Vertically center buttons */
+    justify-content: space-between;
+    gap: 15px; 
+    width: 100%;
+}
+
+/* The Track Container (Middle part) */
+.speaker-track-container {
+    flex: 1;          /* Take up all available space */
+    min-width: 0;     /* CRITICAL FIX: Allows container to shrink below content size */
+    overflow: hidden; /* Hides the long strip of cards */
+    padding: 20px 10px; /* Space for shadows to not get cut off */
+}
+
+.speaker-track {
+    display: flex;
+    gap: 30px; 
+    width: 100%;
+}
+
+/* THE CARD DESIGN */
+.speaker-card {
+    /* MATH: (100% width - (3 gaps * 30px)) / 4 items */
+    min-width: calc((100% - 90px) / 4); 
+    
+    /* NEW STYLING */
+    background: var(--white);
+    border-radius: 16px; 
+    padding: 12px; /* Creates a white frame around the image */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06); /* Soft Shadow */
+    border-bottom: 4px solid var(--primary-color); /* Color accent at bottom */
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+}
+
+/* Hover Effect */
+.speaker-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* Image Wrapper */
+.speaker-img-wrapper {
+    width: 100%;
+    aspect-ratio: 1/1; /* Square */
+    border-radius: 12px; /* Slightly rounder image */
+    overflow: hidden;
+    margin-bottom: 15px;
+    background-color: #f0f0f0;
+}
+
+.speaker-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.02); /* Slight zoom by default to fill corners */
+    transition: transform 0.5s ease;
+}
+
+.speaker-card:hover .speaker-img-wrapper img {
+    transform: scale(1.1); /* Zoom in effect */
+}
+
+/* Text Styling */
+.speaker-info { 
+    text-align: left; 
+    padding: 0 5px 5px 5px; /* Slight padding for text */
+}
+
+.speaker-info h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--text-dark);
+}
+
+.speaker-info .role {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.topic-tag { 
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    background: rgba(0, 86, 179, 0.08);
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* BUTTON STYLING */
+.nav-btn {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: var(--white);
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    
+    /* Shadow makes buttons float above */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+    flex-shrink: 0; /* Prevents button from squishing */
+    z-index: 2;
+}
+
+.nav-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .speaker-card { min-width: calc((100% - 30px) / 2); } /* 2 per row */
+}
+
+@media (max-width: 768px) {
+    .nav-btn { display: none; } /* Hide buttons on mobile */
+    .speaker-track-container { padding: 0; overflow-x: scroll; } /* Allow swipe */
+    .speaker-card { min-width: 85%; } /* Show almost full card */
+}
+
+/* =========================================
+   6. COMMITTEES & ADVISORY
+   ========================================= */
+.committee-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.committee-card {
+    width: 200px;
+    text-align: center;
+}
+
+.committee-card img {
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px;
+    border: 3px solid var(--bg-light);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.advisory-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 40px;
+}
+
+.advisory-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.advisory-list strong { color: var(--primary-color); }
+
+
+/* =========================================
+   7. REGISTRATION
+   ========================================= */
+.fees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.fee-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.fee-card:hover { border-color: var(--primary-color); transform: translateY(-5px); }
+
+.fee-header { font-weight: 700; margin-bottom: 15px; color: var(--text-gray); }
+.fee-price { font-size: 2.5rem; font-weight: 700; color: var(--text-dark); }
+.fee-subprice { color: var(--text-gray); margin-bottom: 15px; }
+.fee-note { font-size: 0.9rem; color: #777; margin-bottom: 25px; }
+
+.btn-outline {
+    display: inline-block;
+    padding: 10px 25px;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.btn-outline:hover { background: var(--primary-color); color: var(--white); }
+
+.bank-details-block {
+    background: #eef2f7;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.bank-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.bank-item span { font-weight: 600; display: block; color: var(--text-gray); }
+
+
+
+/* =========================================
+   8. FOOTER & DATES
+   ========================================= */
+.dates-wrapper { max-width: 800px; margin: 40px auto 0; }
+.date-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+.date-row:nth-child(odd) { background: #fafafa; }
+.date-val { font-weight: 700; color: var(--primary-color); }
+
+.footer-block {
+    background: var(--text-dark);
+    color: #ccc;
+    padding: 60px 0 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.footer-col h4 { color: var(--white); margin-bottom: 20px; }
+.copyright { text-align: center; padding-top: 20px; border-top: 1px solid #333; font-size: 0.9rem; }
+
+/* =========================================
+   9. MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 768px) {
+    /* Navigation */
+    .mobile-menu-btn { display: flex; }
+    
+    .nav-links {
+        position: absolute;
+        top: 70px; left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        gap: 20px;
+        transform: translateY(-150%);
+        transition: var(--transition);
+        z-index: 999;
+    }
+    
+    .nav-links.active { transform: translateY(0); }
+
+    /* Hero */
+    .hero-container { grid-template-columns: 1fr; text-align: center; }
+    .hero-info { justify-content: center; }
+    .hero-divider { margin: 15px auto; }
+    .hero-title { font-size: 2.5rem; }
+
+    /* Advisory & Footer */
+    .advisory-wrapper, .footer-grid, .bank-grid { grid-template-columns: 1fr; }
+    
+    /* Speaker Buttons */
+    .speaker-carousel-wrapper { padding: 0 10px; }
+    .nav-btn { display: none; } /* Hide buttons on mobile, rely on touch scroll */
+}
+
+
